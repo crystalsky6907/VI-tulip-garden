@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Blooming Tulips — For Vismaya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Minimal floating controls toolbar -->
+  <header class="ui-toolbar" id="toolbar">
+    <div class="toolbar-brand">
+      <span class="toolbar-title">Tulip Blossom</span>
+    </div>
+
+    <!-- Quick navigation to Vismaya's Dedicated Garden -->
+    <div class="toolbar-nav">
+      <button id="toVismayaBtn" class="ui-nav-btn vismaya-nav-pill" title="Jump to Vismaya's Flowers">
+        <span class="nav-heart">❤️</span>
+        <span class="nav-text">For Vismaya</span>
+        <span class="nav-badge" id="vismayaToolbarBadge">0/6 🌷</span>
+      </button>
+    </div>
+
+    <div class="toolbar-actions">
+      <button id="soundToggle" class="ui-btn" title="Toggle Magical Chime Sound (M)" aria-label="Toggle Sound">
+        <svg id="soundOnIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <svg id="soundOffIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+      </button>
+
+      <button id="clearBtn" class="ui-btn" title="Clear Canvas (C)" aria-label="Clear Canvas">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 6h18"></path>
+          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+        </svg>
+      </button>
+
+      <button id="fullscreenBtn" class="ui-btn" title="Toggle Fullscreen (F)" aria-label="Toggle Fullscreen">
+        <svg id="fsExpandIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
+          <path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
+          <path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
+          <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+        </svg>
+        <svg id="fsCompressIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+          <path d="M4 14h6v6"></path>
+          <path d="M20 10h-6V4"></path>
+          <path d="M14 10l7-7"></path>
+          <path d="M3 21l7-7"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- SECTION 1: INTERACTIVE BLOOMING CANVAS (HERO PLAYGROUND)  -->
+  <!-- ======================================================== -->
+  <main class="hero-section" id="heroSection">
+    <!-- Canvas container for 60fps high-DPI tulip rendering -->
+    <canvas id="gardenCanvas"></canvas>
+
+    <!-- Initial subtle invitation prompt (fades on first click) -->
+    <div id="initialPrompt" class="initial-prompt">
+      <div class="prompt-glow-dot"></div>
+      <p class="prompt-text">Click anywhere to bloom tulips</p>
+      <p class="prompt-subtext">Every touch blossoms a vibrant new bouquet</p>
+    </div>
+
+    <!-- Floating romantic cue to scroll down to Vismaya's dedicated garden -->
+    <div class="hero-scroll-cue" id="heroScrollDown">
+      <div class="scroll-sparkle-pill">
+        <span class="heart-pulse">❤️</span>
+        <span class="scroll-text">A Flower for Every Little Thing About You</span>
+        <span class="arrow-bounce">↓</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- SECTION 2: "A FLOWER FOR EVERY LITTLE THING ABOUT YOU"   -->
+  <!-- Dedicated interactive flower collection for Vismaya      -->
+  <!-- ======================================================== -->
+  <section id="vismayaSection" class="vismaya-section">
+    <!-- Background Canvas for gently fluttering flower petals -->
+    <canvas id="vismayaPetalsCanvas" class="vismaya-petals-canvas"></canvas>
+
+    <div class="vismaya-container">
+      <header class="vismaya-header">
+        <span class="vismaya-tag">Dedicated to Vismaya</span>
+        <h2 class="vismaya-title">A Flower for Every Little Thing About You</h2>
+        <p class="vismaya-subtitle">Every flower represents a special quality, memory, or reason why you are so important to me, Vismaya.</p>
+
+        <!-- Progress Tracker -->
+        <div class="progress-wrap">
+          <div class="progress-pill">
+            <span class="progress-dot"></span>
+            <span id="vismayaProgressCount">0 of 6 Flowers Bloomed</span>
+          </div>
+          <div class="progress-bar-track">
+            <div id="vismayaProgressBar" class="progress-bar-fill"></div>
+          </div>
+        </div>
+      </header>
+
+      <!-- The 6 Interactive Flower Cards -->
+      <div class="flower-grid" id="vismayaGrid"></div>
+
+      <!-- Romantic Footer Controls -->
+      <footer class="vismaya-footer">
+        <button id="toGardenBtn" class="garden-back-btn">
+          <span>↑ Back to Interactive Garden</span>
+        </button>
+        <button id="replaySurpriseBtn" class="replay-surprise-btn" title="Replay the 6-flower celebration">
+          <span>Replay Celebration ❤️</span>
+        </button>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- SINGLE FLOWER PERSONAL MESSAGE MODAL                     -->
+  <!-- ======================================================== -->
+  <div id="flowerModal" class="flower-modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="flowerModalBackdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close dialog">✕</button>
+      <div class="modal-visual-wrap">
+        <div class="modal-icon-wrap" id="modalIconWrap"></div>
+        <div class="modal-glow-halo"></div>
+      </div>
+      <span class="modal-flower-tag" id="modalFlowerTag">Pink Tulip</span>
+      <h3 class="modal-quality" id="modalQualityTitle">Your Beautiful Smile</h3>
+      <div class="modal-divider">
+        <span class="divider-line"></span>
+        <span class="divider-icon">🌷</span>
+        <span class="divider-line"></span>
+      </div>
+      <p class="modal-message" id="modalMessageBody">Your smile has a way of making even ordinary moments feel special.</p>
+      <div class="modal-footer">
+        <button class="modal-confirm-btn" onclick="document.getElementById('modalCloseBtn').click()">
+          <span>Keep This Flower in Your Heart 🌸</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SPECIAL SURPRISE MODAL (UNLOCKED AFTER ALL 6 FLOWERS)    -->
+  <!-- ======================================================== -->
+  <div id="surpriseModal" class="surprise-modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="surpriseModalBackdrop"></div>
+    <div class="surprise-card">
+      <button class="modal-close" id="surpriseCloseBtn" aria-label="Close dialog">✕</button>
+      <div class="surprise-sparkle-halo"></div>
+      <div class="surprise-bouquet-icon">💐</div>
+      <span class="surprise-badge">Special Surprise Unlocked ❤️</span>
+      <h2 class="surprise-title">For Vismaya</h2>
+      <div class="modal-divider">
+        <span class="divider-line"></span>
+        <span class="divider-icon">❤️</span>
+        <span class="divider-line"></span>
+      </div>
+      <p class="surprise-quote">
+        "Six flowers, six little reasons, and countless more that words could never explain. This garden is yours, Vismaya. ❤️"
+      </p>
+      <div class="surprise-mini-flowers">
+        <span title="Pink Tulip">🌷</span>
+        <span title="Red Tulip">🌹</span>
+        <span title="Yellow Tulip">🌻</span>
+        <span title="White Tulip">🌸</span>
+        <span title="Purple Tulip">🪻</span>
+        <span title="Orange Tulip">🌼</span>
+      </div>
+      <div class="surprise-footer">
+        <button class="surprise-confirm-btn" onclick="document.getElementById('surpriseCloseBtn').click()">
+          <span>Forever Yours ✨</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script src="vismaya.js"></script>
+</body>
+</html>
